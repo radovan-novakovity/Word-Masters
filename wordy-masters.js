@@ -65,7 +65,8 @@ async function init() {
 
         if (!validWord) {
             markInvalidWord();
-            // the return makes sure that the game doesnt let the user type in the next row, instead makes them delete the invalid word and try again
+            /* the return makes sure that the game doesnt let the user type in the next row, 
+            instead makes them delete the invalid word and try again */
             return;
         }
 
@@ -78,7 +79,8 @@ async function init() {
             // mark as correct
             if (guessParts[i] === Wordparts[i]) {
                 letters[currentRow * ANSWER_LENGTH + i].classList.add("correct");
-                // after guessing a letter correctly in a certain position, it helps to check later if there is a same letter left to mark as close
+                /* after guessing a letter correctly in a certain position, 
+                it helps to check later if there is a same letter left to mark as close */
                 map[guessParts[i]]--;
             }
         }
@@ -87,11 +89,13 @@ async function init() {
             if (guessParts[i] === Wordparts[i]) {
                 // do nothing, we already did it
             } else if (Wordparts.includes(guessParts[i]) && map[guessParts[i]] > 0) {
-                // if the word of the day includes the guessed letter, and if one is already guessed correctly, and there are more of the same letter, mark as close
+                /* if the word of the day includes the guessed letter, and if one is already guessed correctly, 
+                and there are more of the same letter, mark as close */
                 letters[currentRow * ANSWER_LENGTH + i].classList.add("close");
                 map[guessParts[i]]--;
             } else {
-                // if the word of the day includes the guessed letter, and if one is already guessed correctly, and there are no more of the same letter, mark as wrong
+                /* if the word of the day includes the guessed letter, and if one is already guessed correctly, 
+                and there are no more of the same letter, mark as wrong */
                 letters[currentRow * ANSWER_LENGTH + i].classList.add("wrong");
             }
         }
@@ -122,10 +126,12 @@ async function init() {
         //alert("not a valid word");
 
         for (let i = 0; i < ANSWER_LENGTH; i++) {
-            // if there is invalid class added before, remove it, so it can be added for the flash effect else it will not flash for the next invalid word
+            /* if there is invalid class added before, remove it, 
+            so it can be added for the flash effect else it will not flash for the next invalid word */
             letters[currentRow * ANSWER_LENGTH + i].classList.remove("invalid");
 
-            // the invalid class has to be added for the flashing, this function executes adding the class for the flash effect after 10 miliseconds
+            /* the invalid class has to be added for the flashing, 
+            this function executes adding the class for the flash effect after 10 miliseconds */
             setTimeout(function () {
                 letters[currentRow * ANSWER_LENGTH + i].classList.add("invalid");
             }, 10);
